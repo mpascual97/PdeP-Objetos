@@ -1,0 +1,69 @@
+import example.*
+
+test "Obtener los destinos más importantes de Barrilete Cósmico" {
+	assert.equals(#{garlicSea, lastToninas}, barrileteCosmico.obtenerDestinosMasImportantes())
+}
+
+test "Aplicarle un 25% de descuento a LastToninas, El precio de Last Toninas es de $2625." {
+	lastToninas.aplicarDescuento(25)
+	assert.equals(2625, lastToninas.getPrecio())
+}
+
+test "Aplicarle un 25% de descuento a LastToninas, Last Toninas tiene al certificado de descuento como parte de su equipaje imprescindible" {
+	lastToninas.aplicarDescuento(25)
+	assert.that(lastToninas.tieneCertificadoDeDescuento())
+}
+
+test "Averiguar si Silver's Sea es un destino peligroso, No lo es." {
+	assert.that(!silverSea.esPeligroso())
+}
+
+test "Aplicar un descuento del 15% a todos los destinos de Barrilete Cósmico. Garlic´s sea: $2125"{
+	barrileteCosmico.aplicarDescuentos(15)
+	assert.equals(2125, garlicSea.getPrecio())
+}
+
+test "Aplicar un descuento del 15% a todos los destinos de Barrilete Cósmico. Silver's Sea: $1147.5"{
+	barrileteCosmico.aplicarDescuentos(15)
+	assert.equals(1147.5, silverSea.getPrecio())
+}
+
+test "Aplicar un descuento del 15% a todos los destinos de Barrilete Cósmico. Last Toninas: $2975"{
+	barrileteCosmico.aplicarDescuentos(15)
+	assert.equals(2975, lastToninas.getPrecio())
+}
+
+test "Aplicar un descuento del 15% a todos los destinos de Barrilete Cósmico. Good Airs: $1275"{
+	barrileteCosmico.aplicarDescuentos(15)
+	assert.equals(1275, goodAirs.getPrecio())
+}
+
+test "Aplicar un descuento del 15% a todos los destinos de Barrilete Cósmico. Todos deben poseer el certificado de descuento."{
+	barrileteCosmico.aplicarDescuentos(15)
+	assert.that(barrileteCosmico.todosLosDestinosTienenCertificado())
+}
+
+test "El destino mas peligroso de barrileteCosmico es lasToninas"{ 
+	assert.equals(#{lastToninas}, #{garlicSea, lastToninas, silverSea, goodAirs}.filter({destino => destino.esPeligroso()}))
+}
+
+test "Saber si Barrilete Cósmico es una empresa extrema, si lo es"{
+	assert.that(barrileteCosmico.esExtrema())
+}
+
+test "Conocer la carta de destinos de Barrilete Cósmico. Last Toninas, Garlic´s sea, Good Airs y Silver's Sea."{
+	assert.that(barrileteCosmico.cartaDeDestinos().contains("Garlic´s Sea") && barrileteCosmico.cartaDeDestinos().contains("Good Airs") && barrileteCosmico.cartaDeDestinos().contains("Last Toninas") && barrileteCosmico.cartaDeDestinos().contains("Silver's Sea"))
+}
+
+test "Obtener las millas de PHari. PHari tiene 500 kilómetros."{
+	assert.equals(500, pHari.obtenerKilometros())
+}
+
+test "Hacer que PHari vuele a Silver 's Sea. PHari puede volar, y Silver's Sea es agregado a su historial"{
+	pHari.volarA(silverSea)
+	assert.that(pHari.getDestinosConocidos().contains(silverSea))
+}
+test "Hacer que PHari vuele a Silver 's Sea. PHari tiene en su cuenta $150."{
+	pHari.volarA(silverSea)
+	assert.equals(150, pHari.getDinero())
+}
