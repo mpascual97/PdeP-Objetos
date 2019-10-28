@@ -1,12 +1,12 @@
 class Viaje{
-	var localidadOrigen;
+	var property localidadOrigen;
 	var localidadDestino;
-	var medioDeTrasporte;
+	var property medioDeTransporte;
 	
 	constructor(unaLocalidadOrigen, unaLocalidadDestino, unMedioDeTrasporte){
 		localidadOrigen = unaLocalidadOrigen
 		localidadDestino = unaLocalidadDestino
-		medioDeTrasporte = unMedioDeTrasporte
+		medioDeTransporte = unMedioDeTrasporte
 	}
 	
 	method localidadDestino(){
@@ -14,7 +14,7 @@ class Viaje{
 	}
 	
 	method getPrecio(){
-		return self.distancia() * medioDeTrasporte.getPrecioPorKilometro() + localidadDestino.getPrecio();
+		return self.distancia() * medioDeTransporte.getPrecioPorKilometro() + localidadDestino.getPrecio();
 	}
 	
 	method distancia(){

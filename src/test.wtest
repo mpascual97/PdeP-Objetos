@@ -3,185 +3,203 @@ import Localidad.*
 import Usuario.*
 import Viaje.*
 import MedioDeTransporte.*
+import Perfil.*
 
 
 test "Obtener las localidades más importantes de Barrilete Cósmico" {
-	var garlicSea = new Localidad("Garlic´s Sea", ["Caña de Pescar" , "Piloto"], 300, 2500)
-	var lastToninas = new Localidad ("Last Toninas", ["Vacuna Gripal" , "Vacuna B" , "Necronomicon"], 500, 3500)
-	var silverSea = new Localidad ("Silver's Sea", ["Protector Solar" , "Equipo de Buceo"], 400, 1350)
-	var goodAirs = new Localidad ("Good Airs", ["Cerveza" , "Protector Solar"], 0, 1500)
 	barrileteCosmico.setLocalidades(#{garlicSea, lastToninas, silverSea, goodAirs})
 	assert.equals(#{garlicSea, lastToninas}, barrileteCosmico.obtenerDestinosMasImportantes())
 }
 
 test "Aplicarle un 25% de descuento a LastToninas, El precio de Last Toninas es de $2625." {
-	var lastToninas = new Localidad ("Last Toninas", ["Vacuna Gripal" , "Vacuna B" , "Necronomicon"], 500, 3500)
-	
 	lastToninas.aplicarDescuento(25)
 	assert.equals(2625, lastToninas.getPrecio())
 }
 
 test "Aplicarle un 25% de descuento a LastToninas, Last Toninas tiene al certificado de descuento como parte de su equipaje imprescindible" {
-	var lastToninas = new Localidad ("Last Toninas", ["Vacuna Gripal" , "Vacuna B" , "Necronomicon"], 500, 3500)
 	lastToninas.aplicarDescuento(25)
 	assert.that(lastToninas.tieneCertificadoDeDescuento())
 }
 
 test "Averiguar si Silver's Sea es un destino peligroso, No lo es." {
-	var silverSea = new Localidad ("Silver's Sea", ["Protector Solar" , "Equipo de Buceo"], 400, 1350)
 	assert.notThat(silverSea.esPeligroso())
 }
 
 test "Aplicar un descuento del 15% a todos los destinos de Barrilete Cósmico. Garlic´s sea: $2125"{
-	var garlicSea = new Localidad("Garlic´s Sea", ["Caña de Pescar" , "Piloto"], 300, 2500)
-	var lastToninas = new Localidad ("Last Toninas", ["Vacuna Gripal" , "Vacuna B" , "Necronomicon"], 500, 3500)
-	var silverSea = new Localidad ("Silver's Sea", ["Protector Solar" , "Equipo de Buceo"], 400, 1350)
-	var goodAirs = new Localidad ("Good Airs", ["Cerveza" , "Protector Solar"], 0, 1500)
 	barrileteCosmico.setLocalidades(#{garlicSea, lastToninas, silverSea, goodAirs})
 	barrileteCosmico.aplicarDescuentos(15)
 	assert.equals(2125, garlicSea.getPrecio())
 }
 
 test "Aplicar un descuento del 15% a todos los destinos de Barrilete Cósmico. Silver's Sea: $1147.5"{
-	var garlicSea = new Localidad("Garlic´s Sea", ["Caña de Pescar" , "Piloto"], 300, 2500)
-	var lastToninas = new Localidad ("Last Toninas", ["Vacuna Gripal" , "Vacuna B" , "Necronomicon"], 500, 3500)
-	var silverSea = new Localidad ("Silver's Sea", ["Protector Solar" , "Equipo de Buceo"], 400, 1350)
-	var goodAirs = new Localidad ("Good Airs", ["Cerveza" , "Protector Solar"], 0, 1500)
 	barrileteCosmico.setLocalidades(#{garlicSea, lastToninas, silverSea, goodAirs})
 	barrileteCosmico.aplicarDescuentos(15)
 	assert.equals(1147.5, silverSea.getPrecio())
 }
 
 test "Aplicar un descuento del 15% a todos los destinos de Barrilete Cósmico. Last Toninas: $2975"{
-	var garlicSea = new Localidad("Garlic´s Sea", ["Caña de Pescar" , "Piloto"], 300, 2500)
-	var lastToninas = new Localidad ("Last Toninas", ["Vacuna Gripal" , "Vacuna B" , "Necronomicon"], 500, 3500)
-	var silverSea = new Localidad ("Silver's Sea", ["Protector Solar" , "Equipo de Buceo"], 400, 1350)
-	var goodAirs = new Localidad ("Good Airs", ["Cerveza" , "Protector Solar"], 0, 1500)
 	barrileteCosmico.setLocalidades(#{garlicSea, lastToninas, silverSea, goodAirs})
 	barrileteCosmico.aplicarDescuentos(15)
 	assert.equals(2975, lastToninas.getPrecio())
 }
 
 test "Aplicar un descuento del 15% a todos los destinos de Barrilete Cósmico. Good Airs: $1275"{
-	var garlicSea = new Localidad("Garlic´s Sea", ["Caña de Pescar" , "Piloto"], 300, 2500)
-	var lastToninas = new Localidad ("Last Toninas", ["Vacuna Gripal" , "Vacuna B" , "Necronomicon"], 500, 3500)
-	var silverSea = new Localidad ("Silver's Sea", ["Protector Solar" , "Equipo de Buceo"], 400, 1350)
-	var goodAirs = new Localidad ("Good Airs", ["Cerveza" , "Protector Solar"], 0, 1500)
 	barrileteCosmico.setLocalidades(#{garlicSea, lastToninas, silverSea, goodAirs})
 	barrileteCosmico.aplicarDescuentos(15)
 	assert.equals(1275, goodAirs.getPrecio())
 }
 
 test "Aplicar un descuento del 15% a todos los destinos de Barrilete Cósmico. Todos deben poseer el certificado de descuento."{
-	var garlicSea = new Localidad("Garlic´s Sea", ["Caña de Pescar" , "Piloto"], 300, 2500)
-	var lastToninas = new Localidad ("Last Toninas", ["Vacuna Gripal" , "Vacuna B" , "Necronomicon"], 500, 3500)
-	var silverSea = new Localidad ("Silver's Sea", ["Protector Solar" , "Equipo de Buceo"], 400, 1350)
-	var goodAirs = new Localidad ("Good Airs", ["Cerveza" , "Protector Solar"], 0, 1500)
 	barrileteCosmico.setLocalidades(#{garlicSea, lastToninas, silverSea, goodAirs})
 	barrileteCosmico.aplicarDescuentos(15)
 	assert.that(barrileteCosmico.todosLosDestinosTienenCertificado())
 }
 
-test "El destino mas peligroso de barrileteCosmico es lasToninas"{ 
-	var garlicSea = new Localidad("Garlic´s Sea", ["Caña de Pescar" , "Piloto"], 300, 2500)
-	var lastToninas = new Localidad ("Last Toninas", ["Vacuna Gripal" , "Vacuna B" , "Necronomicon"], 500, 3500)
-	var silverSea = new Localidad ("Silver's Sea", ["Protector Solar" , "Equipo de Buceo"], 400, 1350)
-	var goodAirs = new Localidad ("Good Airs", ["Cerveza" , "Protector Solar"], 0, 1500)
-	barrileteCosmico.setLocalidades(#{garlicSea, lastToninas, silverSea, goodAirs})
-	
-	assert.equals(#{lastToninas}, barrileteCosmico.getLocalidades().filter({destino => destino.esPeligroso()}))
-}
-
 test "Saber si Barrilete Cósmico es una empresa extrema, si lo es"{
-	var garlicSea = new Localidad("Garlic´s Sea", ["Caña de Pescar" , "Piloto"], 300, 2500)
-	var lastToninas = new Localidad ("Last Toninas", ["Vacuna Gripal" , "Vacuna B" , "Necronomicon"], 500, 3500)
-	var silverSea = new Localidad ("Silver's Sea", ["Protector Solar" , "Equipo de Buceo"], 400, 1350)
-	var goodAirs = new Localidad ("Good Airs", ["Cerveza" , "Protector Solar"], 0, 1500)
 	barrileteCosmico.setLocalidades(#{garlicSea, lastToninas, silverSea, goodAirs})
 	assert.that(barrileteCosmico.esExtrema())
 }
 
 test "Conocer la carta de destinos de Barrilete Cósmico. Last Toninas, Garlic´s sea, Good Airs y Silver's Sea."{
-	var garlicSea = new Localidad("Garlic´s Sea", ["Caña de Pescar" , "Piloto"], 300, 2500)
-	var lastToninas = new Localidad ("Last Toninas", ["Vacuna Gripal" , "Vacuna B" , "Necronomicon"], 500, 3500)
-	var silverSea = new Localidad ("Silver's Sea", ["Protector Solar" , "Equipo de Buceo"], 400, 1350)
-	var goodAirs = new Localidad ("Good Airs", ["Cerveza" , "Protector Solar"], 0, 1500)
 	barrileteCosmico.setLocalidades(#{garlicSea, lastToninas, silverSea, goodAirs})
 	assert.equals([garlicSea.getNombre(), goodAirs.getNombre(), lastToninas.getNombre(), silverSea.getNombre()] ,barrileteCosmico.cartaDeDestinos().sortedBy({destinoA, destinoB => destinoA < destinoB}) )
 }
 
 
-test "Hacer que PHari viaje hasta a Silver 's Sea. PHari puede viajar, y vaijeATheHappy es agregado a su historial"{
-
-	var silverSea = new Localidad ("Silver's Sea", ["Protector Solar" , "Equipo de Buceo"], 400, 1350)
-	var goodAirs = new Localidad ("Good Airs", ["Cerveza" , "Protector Solar"], 0, 1500)
-	var viajeATheHappy = new Viaje(goodAirs, silverSea, new MedioDeTransporte(5, 5))
-	var pHari = new Usuario("Pablo Hari", "pHari", 15000, [], #{}, goodAirs)
+test "Hacer que PHari viaje hasta a Silver 's Sea en una avion con 1 turbina de impulso 10. PHari puede viajar, y vaijeATheHappy es agregado a su historial"{
+	var viajeATheHappy = new Viaje(goodAirs, silverSea, new Avion(1000, [new Turbina(10)]))
+	var pHari = new Usuario("Pablo Hari", "pHari", 15000, [], #{}, goodAirs, estudiantil)
 	pHari.realizarViaje(viajeATheHappy);
 	assert.that(pHari.getViajes().contains(viajeATheHappy))
 }
 
-test "Hacer que PHari viaje a Silver 's Sea. Verificar que su nueva localidad de origan sea Silver's Sea."{
-	var silverSea = new Localidad ("Silver's Sea", ["Protector Solar" , "Equipo de Buceo"], 400, 1350)
-	var goodAirs = new Localidad ("Good Airs", ["Cerveza" , "Protector Solar"], 0, 1500)
-	var viajeATheHappy = new Viaje(goodAirs, silverSea, new MedioDeTransporte(5, 5))
-	var pHari = new Usuario("Pablo Hari", "pHari", 15000, [], #{}, goodAirs)
+test "Hacer que PHari viaje a Silver 's Sea  en una avion con 1 turbina de impulso 10. Verificar que su nueva localidad de origan sea Silver's Sea."{
+	var viajeATheHappy = new Viaje(goodAirs, silverSea, new Avion(1000, [new Turbina(10)]))
+	var pHari = new Usuario("Pablo Hari", "pHari", 15000, [], #{}, goodAirs, estudiantil)
 	pHari.realizarViaje(viajeATheHappy);
 	assert.equals(silverSea, pHari.getLocalidadDeOrigen())
 }
 
-test "Hacer que PHari viaje en camión ganadero a Silver 's Sea. Verificar que sus kilometros recorridos sean 400."{
-	var silverSea = new Localidad ("Silver's Sea", ["Protector Solar" , "Equipo de Buceo"], 400, 1350)
-	var goodAirs = new Localidad ("Good Airs", ["Cerveza" , "Protector Solar"], 0, 1500)
-	var camionGanadero = new MedioDeTransporte(25, 30)
-	var viajeATheHappy = new Viaje(goodAirs, silverSea, camionGanadero)
-	var pHari = new Usuario("Pablo Hari", "pHari", 15000, [], #{}, goodAirs)
+test "Hacer que PHari viaje a Silver 's Sea  en una avion con 1 turbina de impulso 10. Verificar que sus kilometros recorridos sean 400."{
+	
+	var avion = new Avion(1000, [new Turbina(10)])
+	var viajeATheHappy = new Viaje(goodAirs, silverSea, avion)
+	var pHari = new Usuario("Pablo Hari", "pHari", 15000, [], #{}, goodAirs, estudiantil)
 	pHari.realizarViaje(viajeATheHappy);
 	assert.equals(400, pHari.kilometrosRecorridos())
 }
 
 
 test "Silver's Sea se encuentra a 400 km de Good Airs" {
-	var silverSea = new Localidad ("Silver's Sea", ["Protector Solar" , "Equipo de Buceo"], 400, 1350)
-	var goodAirs = new Localidad ("Good Airs", ["Cerveza" , "Protector Solar"], 0, 1500)
-	
 	assert.equals(400,goodAirs.distanciaA(silverSea))
 }
 
-test "Un viaje en micro de Good Airs a Silver's sea cuesta 41350"{
+test "Un viaje en micro de Good Airs a Silver's sea cuesta 2001350"{
 	var silverSea = new Localidad ("Silver's Sea", ["Protector Solar" , "Equipo de Buceo"], 400, 1350)
 	var goodAirs = new Localidad ("Good Airs", ["Cerveza" , "Protector Solar"], 0, 1500)
-	var micro = new MedioDeTransporte(100, 80)
+	var micro = new Micro(100)
 	
 	var viajeATheHappy = new Viaje(goodAirs, silverSea, micro)
-	assert.equals(41350,viajeATheHappy.getPrecio())
+	assert.equals(2001350,viajeATheHappy.getPrecio())
 	
 }
 
-test "Armar viaje para pHari a Maiameee. Dinero insuficiente" {
+test "Armar viaje para pHari (con perfil empresarial) a Maiameee. Dinero insuficiente" {
 	
-	var jetPrivado = new MedioDeTransporte (10000, 1225)
-	var avion = new MedioDeTransporte (800,800)
+	var jetPrivado = new Avion(10000, [new Turbina(1225), new Turbina(1225)])
+	var avion = new Avion(800, [new Turbina(80),new Turbina(20)])
 	
-	var maiame = new Localidad ("Maiameeeee", ["Lentes de sol" , "Pizza", "Clase"], 4406, 13500)
+	var maiame = new Playa("Maiameeeee", ["Lentes de sol" , "Pizza", "Clase"], 4406, 13500)
 	var goodAirs = new Localidad ("Good Airs", ["Cerveza" , "Protector Solar"], 0, 1500)
-	var pHari = new Usuario("Pablo Hari", "pHari", 15000, [], #{}, goodAirs)
+	var pHari = new Usuario("Pablo Hari", "pHari", 15000, [], #{}, goodAirs, empresarial)
 	
-	barrileteCosmico.setMediosDeTransporte(#{jetPrivado,avion})
+	barrileteCosmico.mediosDeTransporte(#{jetPrivado,avion})
 	
 	assert.throwsExceptionWithType(new DineroInsuficienteExpception(), {barrileteCosmico.armarViaje(pHari,maiame)})
 }
 
-test "Armar viaje para rickyFort a Maiameee. Virificar que su localidad de origen cambie a Maiame"{
-	var jetPrivado = new MedioDeTransporte (10000, 1225)
-	var avion = new MedioDeTransporte (800,800)
+test "Armar viaje para pHari (con perfil estudiantil) a Maiameee. No hay medios de transporte disponibles" {
+	
+	var jetPrivado = new Avion(10000, [new Turbina(1225), new Turbina(1225)])
+	var avion = new Avion(800, [new Turbina(80),new Turbina(20)])
+	
+	var maiame = new Playa("Maiameeeee", ["Lentes de sol" , "Pizza", "Clase"], 4406, 13500)
+	var goodAirs = new Localidad ("Good Airs", ["Cerveza" , "Protector Solar"], 0, 1500)
+	var pHari = new Usuario("Pablo Hari", "pHari", 15000, [], #{}, goodAirs, estudiantil)
+	
+	barrileteCosmico.mediosDeTransporte(#{jetPrivado,avion})
+	
+	assert.throwsExceptionWithType(new SinMediosDeTransporteDisponiblesExpception(), {barrileteCosmico.armarViaje(pHari,maiame)})
+}
+
+test "Armar viaje para rickyFort a Maiameee (con perfil empresarial). Virificar que su localidad de origen cambie a Maiame"{
+	var jetPrivado = new Avion(10000, [new Turbina(1225), new Turbina(1225)])
+	var avion = new Avion(800, [new Turbina(80),new Turbina(20)])
 	
 	var maiame = new Localidad ("Maiameeeee", ["Lentes de sol" , "Pizza", "Clase"], 4406, 13500)
-	var goodAirs = new Localidad ("Good Airs", ["Cerveza" , "Protector Solar"], 0, 1500)
-	var rickyFort = new Usuario("Ricardo Fort", "rickyFort", 999999999999, [], #{}, goodAirs)
+	var rickyFort = new Usuario("Ricardo Fort", "rickyFort", 999999999999, [], #{}, goodAirs, empresarial)
 	
-	barrileteCosmico.setMediosDeTransporte(#{jetPrivado, avion})
+	barrileteCosmico.mediosDeTransporte(#{jetPrivado, avion})
 	barrileteCosmico.armarViaje(rickyFort,maiame)
 	assert.equals(maiame, rickyFort.getLocalidadDeOrigen())
 	
 }
+
+test "Armar viaje para rickyFort a Maiameee (con perfil grupo familiar). Virificar que su localidad de origen cambie a Maiame"{
+	var jetPrivado = new Avion(10000, [new Turbina(1225), new Turbina(1225)])
+	var avion = new Avion(800, [new Turbina(80),new Turbina(20)])
+	
+	var maiame = new Localidad ("Maiameeeee", ["Lentes de sol" , "Pizza", "Clase"], 4406, 13500)
+	var rickyFort = new Usuario("Ricardo Fort", "rickyFort", 999999999999, [], #{}, goodAirs, grupoFamiliar)
+	
+	barrileteCosmico.mediosDeTransporte(#{jetPrivado, avion})
+	barrileteCosmico.armarViaje(rickyFort,maiame)
+	assert.equals(maiame, rickyFort.getLocalidadDeOrigen())
+	
+}
+
+//Nuevos testing 3ra entrefa
+test "Verificar que Garlic's Sea, playa, no es peligrosa"{
+	assert.notThat(garlicSea.esPeligroso())
+}
+
+test "Verificar que Bariloche, montaña, es peligrosa"{
+	assert.that(bariloche.esPeligroso())
+}
+
+test "Verificar que Roma, ciudad historica, es destino destacado"{
+	assert.that(roma.EsDestinoImportante())
+}
+
+test "Verificar que Bariloche, montaña, es destino destacado"{
+	assert.that(bariloche.EsDestinoImportante())
+}
+
+test "Verificar que Roma, ciudad historica, no es peligrosa"{
+	assert.notThat(roma.esPeligroso())
+}
+
+test "Verificar que Good Airs, ciudad historica, es peligrosa"{
+	assert.that(goodAirs.esPeligroso())
+}
+
+test "Verificar que el precio x kilometro de un avion con 2 turbinas con impulso 50 es 100"{
+	assert.equals(new Avion(1000, [new Turbina(50), new Turbina(50)]).getPrecioPorKilometro(), 100)
+}
+
+test "Verificar que el precio x kilometro de un micro es 5000"{
+	assert.equals(new Micro(100).getPrecioPorKilometro(), 5000)
+	
+}
+
+test "Verificar que el precio x kilometro de un tren es 3700.7"{
+	assert.equals(new Tren(500).getPrecioPorKilometro(), 3700.7)
+}
+
+test "Verificar que el precio x kilometro del titanic, el cual tiene 1% de probabidades de chocar (es indestructible), es 1000"{
+	var titanic = new Barco(75, 1)
+	assert.equals(titanic.getPrecioPorKilometro(), 1000)
+}
+
+
+

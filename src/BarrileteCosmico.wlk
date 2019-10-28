@@ -2,10 +2,11 @@ import Localidad.*
 import Usuario.*
 import Viaje.*
 import MedioDeTransporte.*
+import Perfil.*
 
 object barrileteCosmico{
 	var localidades = #{};
-	var mediosDeTrasporte;
+	var property mediosDeTransporte;
 	
 	method setLocalidades(unasLocalidades){
 		localidades = unasLocalidades
@@ -15,9 +16,6 @@ object barrileteCosmico{
 		return localidades
 	}
 	
-	method setMediosDeTransporte(unosMediosDeTrasporte){
-		mediosDeTrasporte = unosMediosDeTrasporte
-	}
 	
 	method obtenerDestinosMasImportantes(){
 		return localidades.filter({destino => destino.EsDestinoImportante()})
@@ -40,7 +38,9 @@ object barrileteCosmico{
 	}
 	
 	method armarViaje(unUsuario, unaLocalidad){
-		var nuevoViaje = new Viaje(unUsuario.localidadOrigen(), unaLocalidad, mediosDeTrasporte.anyOne());
+		var nuevoViaje = new Viaje(unUsuario.localidadOrigen(), unaLocalidad, unUsuario.perfil().elegirMedioDeTransporte(unUsuario, unUsuario.localidadOrigen().distanciaA(unaLocalidad)));
+		 
 		unUsuario.realizarViaje(nuevoViaje);
 	}
 }
+

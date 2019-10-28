@@ -1,3 +1,4 @@
+import Perfil.*
 class DineroInsuficienteExpception inherits Exception{}
 
 class Usuario{
@@ -7,14 +8,16 @@ class Usuario{
 	var viajes;
 	var siguiendo; //Conjunto ya que no debe aceptar repetidos
 	var localidadOrigen; 
+	var property perfil;
 	
-	constructor (unNombreCompleto, unNombreDeUsuario, unDinero, unosViajes, unosUsuarios, unaLocalidad){
+	constructor (unNombreCompleto, unNombreDeUsuario, unDinero, unosViajes, unosUsuarios, unaLocalidad, unPerfil){
 		nombreCompleto = unNombreCompleto
 		nombreDeUsuario = unNombreDeUsuario
 		dineroDisponible = unDinero
 		viajes = unosViajes
 		siguiendo = unosUsuarios
 		localidadOrigen = unaLocalidad		
+		perfil = unPerfil
 	}
 	
 	method getLocalidadDeOrigen(){
